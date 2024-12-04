@@ -1,5 +1,5 @@
 name: Hardhat Pipeline
-on: [push, pull_request]
+on: [push, pull_request,workflow_dispatch]
 env:
   DEBUG: '@tenderly/github-action'
   ## Needed available as env variables for hardhat.config.js
