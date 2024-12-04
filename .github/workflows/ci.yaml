@@ -1,0 +1,21 @@
+name: Smart Contract CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Virtual TestNet
+        uses: Tenderly/vnet-github-action@v1.0.6
+        with:
+          access_key: ${{ secrets.TENDERLY_ACCESS_KEY }}
+          project_name: ${{ vars.TENDERLY_PROJECT_NAME }}
+          account_name: ${{ vars.TENDERLY_ACCOUNT_NAME }}
+          testnet_name: 'CI Test Network'
+          network_id: 1
+          chain_id: 73571  # Recommended: prefix with 7357 for unique identification to avoid transaction replay attacks
+          explorer_enabled: true 
+          explorer_verification_type: 'src'  # Options: 'abi', 'src', 'bytecode'
+          sync_state_enabled: true 
